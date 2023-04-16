@@ -65,7 +65,7 @@ print(parsecs_input + 'parsecs is ' + str(lightyears) + ' lightyears')
 # -------------------------------------------------------------------
 age = 8
 try:
-    print(age)
+    print(age) 
 except:
     print('Error: Variable not defined')
 
