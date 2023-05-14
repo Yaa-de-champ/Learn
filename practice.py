@@ -237,7 +237,6 @@ import plotly.graph_objects as go
 import plotly.express as px
 
 
-app = dash.Dash(__name__)
 
 airline_dataset = pd.read_csv('airline_data.csv', encoding='ISO-8859-1', dtype={'Div1Airport':str, 'Div1TailNum':str, 'Div2Airport':str, 'Div2TailNum':str})
 
@@ -287,14 +286,14 @@ def compute_info(airline_data, entered_year):
     # Select data
     df =  airline_data[airline_data['Year']==int(entered_year)]
     # Compute delay averages
-    avg_car = df.groupby(['Month','Reporting_Airline'])['CarrierDelay'].mean().reset_index()
+    avg_car = df.groupby(['Month','Reporting_Airline'])['CarrierDelay'].mean().reset_index() #the resulting avg_car dataframe contains the average 'CarrierDelay' time (in minutes) for each combination of month and airline in the original dataset.
     avg_weather = df.groupby(['Month','Reporting_Airline'])['WeatherDelay'].mean().reset_index()
     avg_NAS = df.groupby(['Month','Reporting_Airline'])['NASDelay'].mean().reset_index()
     avg_sec = df.groupby(['Month','Reporting_Airline'])['SecurityDelay'].mean().reset_index()
     avg_late = df.groupby(['Month','Reporting_Airline'])['LateAircraftDelay'].mean().reset_index()
     return avg_car, avg_weather, avg_NAS, avg_sec, avg_late
 
-
+#Task : Try to understand the function and importance of 'reset_index method"
 
 """Callback Function
 Function that returns fugures using the provided input year.
