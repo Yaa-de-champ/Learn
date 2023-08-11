@@ -81,3 +81,70 @@ except ZeroDivisionError:
 finally: #executes whether there was an error or not 
     print('Code executed successfully')
 print(f'Division: {result}')
+
+# -----------------------------------------------------------------------------------------------------------------
+#%%
+import numpy as np
+
+def find_max(x):
+    """A simple function to find the largest value in a numpy array.
+
+    Args:
+        x (array[float]): an array of numbers of size n
+
+    Returns:
+        float: The maximum value in x.
+    """
+
+    ##################
+    # YOUR CODE HERE #
+    ##################
+    max_value = np.max(x)
+    return max_value
+    
+
+my_array = np.array([3, 7, 1, 9, 4, 5])
+max_value = find_max(my_array)
+print(max_value)
+
+#%%
+import pennylane as qml
+import numpy as np
+
+dev = qml.device('default.qubit', wires=2)
+
+@qml.qnode(dev)
+def circuit(x):
+    qml.RZ(x, wires=0)
+    qml.CNOT(wires=[0,1])
+    qml.RY(x, wires=1)
+    return qml.expval(qml.PauliZ(1))
+
+result = circuit(0.543)
+
+import matplotlib.pyplot as plt
+qml.drawer.use_style("black_white")
+fig, ax = qml.draw_mpl(circuit)(np.pi/4, 0.7)
+plt.show()
+
+from qiskit import QuantumCircuit
+from qiskit.circuit import Parameter
+import numpy as np
+
+dev = qml.device('default.qubit', wires=2)
+
+theta = Parameter('θ')
+
+qc = QuantumCircuit(2)
+qc.rz(theta, [0])
+qc.rx(theta, [0])
+qc.cx(0, 1)
+
+@qml.qnode(dev)
+def quantum_circuit_with_loaded_subcircuit(x):
+    qml.from_qiskit(qc)({theta: x})
+    return qml.expval(qml.PauliZ(0))
+
+angle = np.pi/2
+result = quantum_circuit_with_loaded_subcircuit(angle)
+# %%
