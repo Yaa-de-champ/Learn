@@ -64,16 +64,16 @@
 
 ## creating a class
 
-# class Elevator:
-#     def __init__(self, starting_floor):
-#         self.make = "The elevator company"
-#         self.floor = starting_floor
+class Elevator:
+    def __init__(self, starting_floor):
+        self.make = "The elevator company"
+        self.floor = starting_floor
 
-# # To create the object
+# To create the object
 
-# elevator = Elevator(1)
-# print(elevator.make) # "The Elevator company"
-# print(elevator.floor) # 1
+elevator = Elevator(1)
+print(elevator.make) # "The Elevator company"
+print(elevator.floor) # 1
 
 # from sklearn import tree
 # features = [[140, "smooth"], [130, "smooth"], [150, "bumpy"], [170, "bumpy"] ]
